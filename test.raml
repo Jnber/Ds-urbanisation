@@ -1,0 +1,42 @@
+#%RAML 1.0
+resourceTypes:
+  Collection:
+    get:
+      responses:
+        200:
+          body:
+            application/json:
+              type: <<item>>[]
+    post:
+      body:
+        application/json:
+          type: <<item>>
+  Member:
+    delete:
+      responses:
+        204:
+    put:
+      body:
+        application/json:
+          type: <<item>>
+          
+title: Employees
+version: v1
+baseUri: /employees
+
+types:
+  Employee:
+    properties:
+      name: string
+      salary: number
+    example:
+      name: Mohamed Ben Salah
+      id: 1
+      salary: 1000
+/employees:
+  type: { Collection: { item: Employee } }
+  get:
+    queryParameters:
+     
+  /{id}:
+    type: { Member: { item: Employee } }
